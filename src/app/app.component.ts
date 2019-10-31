@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DataService } from './data.service';
+import { Employee } from './Model/Model';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'EmployeeManagerFrontEndAng';
+
+  employees: Employee[];
+
+  constructor(private dataService: DataService) { }
+
+  getEmployees(Url: string) {
+    this.dataService.getEmployees(Url).subscribe(
+      employeesResponse => {
+        this.employees = employeesResponse;
+      }
+    );
+  }
 }
